@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">CFT</string>
+    <string name="paymentSystem">Платежная система</string>
+    <string name="cardType">Тип карты</string>
+    <string name="country">Страна</string>
+    <string name="bankName">Банк</string>
+    <string name="website">Сайт</string>
+    <string name="bankPhone">Телефон</string>
 </resources>
