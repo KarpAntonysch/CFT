@@ -1,6 +1,5 @@
 package com.example.cft
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,23 +8,34 @@ import android.view.ViewGroup
 import com.example.cft.databinding.FragmentMainBinding
 
 class MainFragment : Fragment() {
-    lateinit var binding: FragmentMainBinding
-    private  var viewModel = MainFragmentViewModel()
+    private lateinit var binding: FragmentMainBinding
+    private lateinit var viewModel: MainFragmentViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         binding = FragmentMainBinding.inflate(inflater,container,false)
+        viewModel = MainFragmentViewModel()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        viewModel.binRequest("552175",requireContext())
+        getCurrentData()
+    }
+    //TODO краш при ошибке сервера! Учестьи поймать!
+    private fun getCurrentData(){
+        binding.btnRequest.setOnClickListener{
+            val bin:String = binding.etBin.text.toString()
+            viewModel.binRequest(bin,requireContext())
+            getCurrentBankingModel()
+        }
     }
 
-
-
+    private fun getCurrentBankingModel(){
+        viewModel.currentBin.observe(viewLifecycleOwner) {
+            binding.textView.text = it.toString()
+        }
+    }
 }
