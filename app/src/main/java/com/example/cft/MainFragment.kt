@@ -35,12 +35,14 @@ class MainFragment : Fragment() {
 
     private fun getCurrentBankingModel(){
         viewModel.currentBin.observe(viewLifecycleOwner) {
-            binding.paymentSystem.text = it.paymentSystem
-            binding.cardType.text = it.cardType
-            binding.country.text = it.country
-            binding.bankName.text = it.bankName
-            binding.website.text = it.website
-            binding.bankPhone.text = it.bankPhone
+            with(binding){
+                paymentSystem.text = it.paymentSystem
+                cardType.text = it?.cardType
+                country.text = it.country
+                bankName.text = it.bankName
+                website.text = it.website
+                bankPhone.text = it.bankPhone
+            }
         }
     }
 }
