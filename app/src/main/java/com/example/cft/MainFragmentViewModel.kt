@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.android.volley.NoConnectionError
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import org.json.JSONException
@@ -12,7 +13,6 @@ import org.json.JSONObject
 class MainFragmentViewModel : ViewModel() {
 
     val currentBin = MutableLiveData<BankingInformationModel>()
-
 
     fun binRequest(bin: String, context: Context) {
         val url = "https://lookup.binlist.net/$bin"
@@ -26,54 +26,61 @@ class MainFragmentViewModel : ViewModel() {
                 binDataUsage(cardData)
             },
             { error ->
-                Log.d("MyLog", "Err: $error")
+                if (error is NoConnectionError){
+                    Log.d("MyLog","Err: Ошибка сети")
+                } else{
+                    Log.d("MyLog","Err:$error Ошибка сервера")
+                }
             }
         )
         queue.add(request)
     }
 
+
     private fun binDataUsage(cardData: String) {
         val jsonCardData = JSONObject(cardData)
 
-        // try/catch для того, что б не зависить от форма json`а
+        // try/catch для того, что б не зависить от форма json`а (так как сам сервер работает по разному: некоторые поля могут отсутсвовать, другие быть null)
 
         val bankingInformation = BankingInformationModel()
 
         try {
             bankingInformation.paymentSystem = jsonCardData.getString("scheme")
+        } catch (_: JSONException) {
         }
-        catch (_: JSONException) {}
         try {
             bankingInformation.cardType = jsonCardData.getString("type")
+        } catch (_: JSONException) {
         }
-        catch (_: JSONException) {}
         try {
             bankingInformation.country = jsonCardData.getJSONObject("country").getString("name")
+        } catch (_: JSONException) {
         }
-        catch (_: JSONException) {}
 
         try {
-            bankingInformation.latitude =  jsonCardData.getJSONObject("country").getString("latitude")
+            bankingInformation.latitude =
+                jsonCardData.getJSONObject("country").getString("latitude")
+        } catch (_: JSONException) {
         }
-        catch (_: JSONException) {}
 
         try {
-            bankingInformation.longitude =  jsonCardData.getJSONObject("country").getString("longitude")
+            bankingInformation.longitude =
+                jsonCardData.getJSONObject("country").getString("longitude")
+        } catch (_: JSONException) {
         }
-        catch (_: JSONException) {}
 
         try {
             bankingInformation.bankName = jsonCardData.getJSONObject("bank").getString("name")
+        } catch (_: JSONException) {
         }
-        catch (_: JSONException) {}
         try {
             bankingInformation.website = jsonCardData.getJSONObject("bank").getString("url")
+        } catch (_: JSONException) {
         }
-        catch (_: JSONException) {}
         try {
-            bankingInformation.bankPhone =  jsonCardData.getJSONObject("bank").getString("phone")
+            bankingInformation.bankPhone = jsonCardData.getJSONObject("bank").getString("phone")
+        } catch (_: JSONException) {
         }
-        catch (_: JSONException) {}
 
         currentBin.value = bankingInformation
 

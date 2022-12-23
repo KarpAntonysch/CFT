@@ -1,10 +1,10 @@
 package com.example.cft
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.example.cft.databinding.FragmentMainBinding
 
 class MainFragment : Fragment() {
@@ -15,7 +15,7 @@ class MainFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        binding = FragmentMainBinding.inflate(inflater,container,false)
+        binding = FragmentMainBinding.inflate(inflater, container, false)
         viewModel = MainFragmentViewModel()
         return binding.root
     }
@@ -24,18 +24,30 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         getCurrentData()
     }
-    //TODO краш при ошибке сервера! Учестьи поймать!
-    private fun getCurrentData(){
-        binding.btnRequest.setOnClickListener{
-            val bin:String = binding.etBin.text.toString()
-            viewModel.binRequest(bin,requireContext())
-            getCurrentBankingModel()
+
+    private fun getCurrentData() {
+        binding.btnRequest.setOnClickListener {
+            if (!etChecking()) {
+                val bin: String = binding.etBin.text.toString()
+                viewModel.binRequest(bin, requireContext())
+                getCurrentBankingModel()
+            }
         }
     }
 
-    private fun getCurrentBankingModel(){
+    private fun etChecking(): Boolean {
+        val warning = R.string.binWarning
+        with(binding){
+            if (etBin.text.length<6) etBin.error = getString(warning)
+            return etBin.text.length<6
+        }
+
+    }
+
+
+    private fun getCurrentBankingModel() {
         viewModel.currentBin.observe(viewLifecycleOwner) {
-            with(binding){
+            with(binding) {
                 paymentSystem.text = it.paymentSystem
                 cardType.text = it?.cardType
                 country.text = it.country
