@@ -1,4 +1,4 @@
-package com.example.cft
+package com.example.cft.fragment
 
 import android.content.Context
 import android.util.Log
@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.android.volley.NoConnectionError
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.example.cft.BankingInformationModel
 import org.json.JSONException
 import org.json.JSONObject
 
@@ -28,8 +29,10 @@ class MainFragmentViewModel : ViewModel() {
             { error ->
                 if (error is NoConnectionError) {
                     Log.d("MyLog", "Err: Ошибка сети")
+                    //TODO оповещение ошибка сети
                 } else {
                     Log.d("MyLog", "Err:$error Ошибка сервера")
+                    //TODO оповещение ошибка сервера
                 }
             }
         )
