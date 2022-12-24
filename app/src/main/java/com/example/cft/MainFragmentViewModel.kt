@@ -26,10 +26,10 @@ class MainFragmentViewModel : ViewModel() {
                 binDataUsage(cardData)
             },
             { error ->
-                if (error is NoConnectionError){
-                    Log.d("MyLog","Err: Ошибка сети")
-                } else{
-                    Log.d("MyLog","Err:$error Ошибка сервера")
+                if (error is NoConnectionError) {
+                    Log.d("MyLog", "Err: Ошибка сети")
+                } else {
+                    Log.d("MyLog", "Err:$error Ошибка сервера")
                 }
             }
         )
@@ -47,43 +47,48 @@ class MainFragmentViewModel : ViewModel() {
         try {
             bankingInformation.paymentSystem = jsonCardData.getString("scheme")
         } catch (_: JSONException) {
+            bankingInformation.paymentSystem = "Информация отсутсвует"
         }
         try {
             bankingInformation.cardType = jsonCardData.getString("type")
         } catch (_: JSONException) {
+            bankingInformation.cardType = "Информация отсутсвует"
         }
         try {
             bankingInformation.country = jsonCardData.getJSONObject("country").getString("name")
         } catch (_: JSONException) {
+            bankingInformation.country = "Информация отсутсвует"
         }
 
         try {
             bankingInformation.latitude =
                 jsonCardData.getJSONObject("country").getString("latitude")
         } catch (_: JSONException) {
+            bankingInformation.latitude = "Информация отсутсвует"
         }
 
         try {
             bankingInformation.longitude =
                 jsonCardData.getJSONObject("country").getString("longitude")
         } catch (_: JSONException) {
+            bankingInformation.longitude = "Информация отсутсвует"
         }
 
         try {
             bankingInformation.bankName = jsonCardData.getJSONObject("bank").getString("name")
         } catch (_: JSONException) {
+            bankingInformation.bankName = "Информация отсутсвует"
         }
         try {
             bankingInformation.website = jsonCardData.getJSONObject("bank").getString("url")
         } catch (_: JSONException) {
+            bankingInformation.website = "Информация отсутсвует"
         }
         try {
             bankingInformation.bankPhone = jsonCardData.getJSONObject("bank").getString("phone")
         } catch (_: JSONException) {
+            bankingInformation.bankPhone = "Информация отсутсвует"
         }
-
         currentBin.value = bankingInformation
-
     }
-
 }

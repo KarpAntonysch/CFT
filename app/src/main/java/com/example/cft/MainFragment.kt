@@ -1,10 +1,14 @@
 package com.example.cft
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.MutableLiveData
 import com.example.cft.databinding.FragmentMainBinding
 
 class MainFragment : Fragment() {
@@ -31,22 +35,23 @@ class MainFragment : Fragment() {
                 val bin: String = binding.etBin.text.toString()
                 viewModel.binRequest(bin, requireContext())
                 getCurrentBankingModel()
+
             }
         }
     }
 
     private fun etChecking(): Boolean {
         val warning = R.string.binWarning
-        with(binding){
-            if (etBin.text.length<6) etBin.error = getString(warning)
-            return etBin.text.length<6
+        with(binding) {
+            if (etBin.text.length < 6) etBin.error = getString(warning)
+            return etBin.text.length < 6
         }
 
     }
 
 
     private fun getCurrentBankingModel() {
-        viewModel.currentBin.observe(viewLifecycleOwner) {
+          viewModel.currentBin.observe(viewLifecycleOwner) {
             with(binding) {
                 paymentSystem.text = it.paymentSystem
                 cardType.text = it?.cardType
@@ -54,7 +59,17 @@ class MainFragment : Fragment() {
                 bankName.text = it.bankName
                 website.text = it.website
                 bankPhone.text = it.bankPhone
+                callToBank(it.bankPhone)
             }
+        }
+    }
+
+    private fun callToBank(phoneNumber: String?) {
+        binding.btnPhone.setOnClickListener{
+            if (phoneNumber!=="Информация отсутсвует"){
+                val intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:$phoneNumber"))
+                startActivity(intent)
+           }// оповещение, что номера нет в базе
         }
     }
 }
