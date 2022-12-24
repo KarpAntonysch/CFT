@@ -7,4 +7,7 @@
     <string name="website">Сайт</string>
     <string name="bankPhone">Телефон</string>
     <string name="binWarning">не менее 6 цифр</string>
+    <string name="call">позвонить </string>
+    <string name="go_to_web">на сайт</string>
+    <string name="go_to_map">к карте</string>
 </resources>

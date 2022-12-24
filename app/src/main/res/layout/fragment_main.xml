@@ -128,9 +128,11 @@
                 android:gravity="center|center_vertical" />
 
             <Button
-                android:id="@+id/button5"
+                android:id="@+id/btnCountry"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="@string/go_to_map"
+                android:textSize="10sp" />
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
@@ -193,9 +195,11 @@
                 android:gravity="center|center_vertical" />
 
             <Button
-                android:id="@+id/button4"
+                android:id="@+id/btnWebSite"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="@string/go_to_web"
+                android:textSize="10dp"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
@@ -229,7 +233,9 @@
             <Button
                 android:id="@+id/btnPhone"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="@string/call"
+                android:textSize="10dp"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

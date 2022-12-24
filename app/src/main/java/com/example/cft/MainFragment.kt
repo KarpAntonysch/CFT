@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.MutableLiveData
 import com.example.cft.databinding.FragmentMainBinding
 
 class MainFragment : Fragment() {
@@ -51,7 +50,7 @@ class MainFragment : Fragment() {
 
 
     private fun getCurrentBankingModel() {
-          viewModel.currentBin.observe(viewLifecycleOwner) {
+        viewModel.currentBin.observe(viewLifecycleOwner) {
             with(binding) {
                 paymentSystem.text = it.paymentSystem
                 cardType.text = it?.cardType
@@ -59,17 +58,43 @@ class MainFragment : Fragment() {
                 bankName.text = it.bankName
                 website.text = it.website
                 bankPhone.text = it.bankPhone
+
                 callToBank(it.bankPhone)
+
+                goToSite(it.website)
+
+                goToMap(it.latitude.toString(), it.longitude.toString())
             }
         }
     }
 
     private fun callToBank(phoneNumber: String?) {
-        binding.btnPhone.setOnClickListener{
-            if (phoneNumber!=="Информация отсутсвует"){
-                val intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:$phoneNumber"))
+        binding.btnPhone.setOnClickListener {
+            val phoneUri = Uri.parse("tel:$phoneNumber")
+            val intent = Intent(Intent.ACTION_DIAL,phoneUri )
+            if (phoneNumber !== "Информация отсутсвует") {
                 startActivity(intent)
-           }// оповещение, что номера нет в базе
+            }// оповещение, что номера нет в базе
+        }
+    }
+
+    private fun goToSite(url: String?) {
+        val webUri = Uri.parse("https://$url")
+        val intent = Intent(Intent.ACTION_VIEW, webUri)
+        binding.btnWebSite.setOnClickListener {
+            if (url !== "Информация отсутсвует") {
+                startActivity(intent)
+            }
+        }
+    }
+
+    private fun goToMap(latitude: String, longitude: String) {
+        val geoUri = Uri.parse("geo:$latitude , $longitude?z=4")
+        val mapIntent = Intent(Intent.ACTION_VIEW, geoUri)
+        binding.btnCountry.setOnClickListener {
+            if (latitude !== "Информация отсутсвует" || longitude !== "Информация отсутсвует") {
+                startActivity(mapIntent)
+            }
         }
     }
 }
