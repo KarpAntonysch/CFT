@@ -26,7 +26,7 @@ class MainFragmentViewModel(private val repository: BankingRepository) : ViewMod
             url,
             { cardData ->
                 Log.d("MyLog", "Res: $cardData")
-                binDataUsage(cardData)
+                binDataUsage(cardData,bin)
             },
             { error ->
                 if (error is NoConnectionError) {
@@ -42,12 +42,14 @@ class MainFragmentViewModel(private val repository: BankingRepository) : ViewMod
     }
 
 
-    private fun binDataUsage(cardData: String) {
+    private fun binDataUsage(cardData: String,bin: String) {
         val jsonCardData = JSONObject(cardData)
 
         // try/catch для того, что б не зависить от форма json`а (так как сам сервер работает по разному: некоторые поля могут отсутсвовать, другие быть null)
 
         val bankingInformation = BankingInformationModel()
+
+        bankingInformation.bin = bin
 
         try {
             bankingInformation.paymentSystem = jsonCardData.getString("scheme")

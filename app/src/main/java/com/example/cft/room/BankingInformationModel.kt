@@ -7,6 +7,9 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "bankingTable")
 data class BankingInformationModel(
 
+    @ColumnInfo(name = "bin")
+    var bin: String? = "Информация отсутсвует",
+
     @ColumnInfo(name = "paymentSystem")
     var paymentSystem: String? = "Информация отсутсвует",
 
