@@ -7,13 +7,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
 import com.example.cft.R
+import com.example.cft.RvAdapter
 import com.example.cft.databinding.FragmentMainBinding
 import com.example.cft.room.DBApplication
 
 class MainFragment : Fragment() {
     private lateinit var binding: FragmentMainBinding
     private lateinit var viewModel: MainFragmentViewModel
+    private val adapter = RvAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -104,5 +107,10 @@ class MainFragment : Fragment() {
         viewModel.currentBin.observe(viewLifecycleOwner) {
             viewModel.insertCard(it)
         }
+    }
+    private fun realizationOfRV(){
+        val recyclerview = binding.rvHistory
+        recyclerview.adapter = adapter
+
     }
 }
