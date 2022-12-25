@@ -4,15 +4,17 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.android.volley.NoConnectionError
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.example.cft.BankingInformationModel
+import com.example.cft.room.BankingInformationModel
+import com.example.cft.room.BankingRepository
+import kotlinx.coroutines.launch
 import org.json.JSONException
 import org.json.JSONObject
 
-class MainFragmentViewModel : ViewModel() {
-
+class MainFragmentViewModel(private val repository: BankingRepository) : ViewModel() {
     val currentBin = MutableLiveData<BankingInformationModel>()
 
     fun binRequest(bin: String, context: Context) {
@@ -93,5 +95,9 @@ class MainFragmentViewModel : ViewModel() {
             bankingInformation.bankPhone = "Информация отсутсвует"
         }
         currentBin.value = bankingInformation
+    }
+
+    fun insertCard(card: BankingInformationModel) = viewModelScope.launch {
+        repository.insertCard(card)
     }
 }

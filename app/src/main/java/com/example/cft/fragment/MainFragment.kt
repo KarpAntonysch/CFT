@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.cft.R
 import com.example.cft.databinding.FragmentMainBinding
+import com.example.cft.room.DBApplication
 
 class MainFragment : Fragment() {
     private lateinit var binding: FragmentMainBinding
@@ -19,13 +20,14 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         binding = FragmentMainBinding.inflate(inflater, container, false)
-        viewModel = MainFragmentViewModel()
+        viewModel = MainFragmentViewModel((requireActivity().application as DBApplication).bankingRepository)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         getCurrentData()
+        insertCard()
     }
 
     private fun getCurrentData() {
@@ -95,6 +97,12 @@ class MainFragment : Fragment() {
             if (latitude !== "Информация отсутсвует" || longitude !== "Информация отсутсвует") {
                 startActivity(mapIntent)
             }//TODO оповещение, что координат нет в базе
+        }
+    }
+
+    private fun insertCard(){
+        viewModel.currentBin.observe(viewLifecycleOwner) {
+            viewModel.insertCard(it)
         }
     }
 }
