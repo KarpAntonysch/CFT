@@ -2,9 +2,7 @@ package com.example.cft.fragment
 
 import android.content.Context
 import android.util.Log
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.android.volley.NoConnectionError
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
@@ -102,4 +100,6 @@ class MainFragmentViewModel(private val repository: BankingRepository) : ViewMod
     fun insertCard(card: BankingInformationModel) = viewModelScope.launch {
         repository.insertCard(card)
     }
+
+     val allCards:LiveData<List<BankingInformationModel>> = repository.getAllCards.asLiveData()
 }

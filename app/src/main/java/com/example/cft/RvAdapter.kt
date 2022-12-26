@@ -16,6 +16,8 @@ class RvAdapter:ListAdapter<BankingInformationModel,RvAdapter.BankingViewHolder>
         fun bind(card:BankingInformationModel,position: Int) = with(binding){
             number.text =(position+1).toString()
             tvCard.text = card.bin
+            tvBank.text = card.bankName
+            tvCountry.text = card.country
         }
 
     }

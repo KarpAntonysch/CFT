@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.RecyclerView
 import com.example.cft.R
 import com.example.cft.RvAdapter
 import com.example.cft.databinding.FragmentMainBinding
@@ -31,6 +30,7 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         getCurrentData()
         insertCard()
+        realizationOfRV()
     }
 
     private fun getCurrentData() {
@@ -111,6 +111,10 @@ class MainFragment : Fragment() {
     private fun realizationOfRV(){
         val recyclerview = binding.rvHistory
         recyclerview.adapter = adapter
+        viewModel.allCards.observe(viewLifecycleOwner) {
+            cardList ->
+            cardList.let { adapter.submitList(it) }
+        }
 
     }
 }
