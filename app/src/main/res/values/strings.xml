@@ -22,5 +22,6 @@
            ● Информации о вашей карте нет в базе.\n\n
            ● Ваша платежная система MIR.</string>
     <string name="posText">понятно</string>
+    <string name="emptyBin">Введите BIN</string>
 
 </resources>

@@ -8,10 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.example.cft.dialogs.DialogInterface
 import com.example.cft.R
 import com.example.cft.RvAdapter
 import com.example.cft.databinding.FragmentMainBinding
+import com.example.cft.dialogs.DialogInterface
 import com.example.cft.room.DBApplication
 
 class MainFragment : Fragment(), CallBackListener, DialogInterface {
@@ -39,11 +39,14 @@ class MainFragment : Fragment(), CallBackListener, DialogInterface {
 
     private fun getCurrentData() {
         binding.btnRequest.setOnClickListener {
-            if (!etChecking()) {
-                val bin: String = binding.etBin.text.toString()
-                viewModel.binRequest(bin, requireContext())
-                getCurrentBankingModel()
-
+            if (!binding.etBin.text.isNullOrEmpty()) {
+                if (!etChecking()) {
+                    val bin: String = binding.etBin.text.toString()
+                    viewModel.binRequest(bin, requireContext())
+                    getCurrentBankingModel()
+                }
+            } else {
+                Toast.makeText(requireContext(), R.string.emptyBin, Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -134,10 +137,16 @@ class MainFragment : Fragment(), CallBackListener, DialogInterface {
     }
 
     override fun openConnectionDialog() {
-        showDialog(R.string.titleWeb,R.string.descriptionWeb,R.string.posText,childFragmentManager)
+        showDialog(R.string.titleWeb,
+            R.string.descriptionWeb,
+            R.string.posText,
+            childFragmentManager)
     }
 
     override fun openServerDialog() {
-        showDialog(R.string.titleServer,R.string.descriptionServer,R.string.posText,childFragmentManager)
+        showDialog(R.string.titleServer,
+            R.string.descriptionServer,
+            R.string.posText,
+            childFragmentManager)
     }
 }
