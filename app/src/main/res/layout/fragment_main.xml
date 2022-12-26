@@ -2,20 +2,22 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/b"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center"
     tools:context=".fragment.MainFragment">
 
     <EditText
         android:id="@+id/etBin"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="50dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="80dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="130dp"
         android:autofillHints=""
-        android:background="#CCC6C6"
-        android:backgroundTint="#CCC6C6"
+        android:background="@drawable/tv_radius"
+        android:backgroundTint="@color/w"
         android:ems="10"
         android:inputType="number"
         android:textSize="20sp"
@@ -32,8 +34,8 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:text="Button"
+        android:layout_marginEnd="16dp"
+        android:text="@string/search"
         app:layout_constraintBottom_toBottomOf="@+id/etBin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/etBin"
@@ -43,7 +45,10 @@
         android:id="@+id/cardView5"
         android:layout_width="85dp"
         android:layout_height="112dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/tv_radius"
+        android:backgroundTint="@color/w"
+        app:cardCornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -54,12 +59,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:backgroundTint="@color/w"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/textView16"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:background="@drawable/tv_radius"
+                android:backgroundTint="@color/e"
                 android:gravity="center"
                 android:text="@string/paymentSystem" />
 
@@ -67,6 +76,8 @@
                 android:id="@+id/paymentSystem"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_margin="2dp"
+                android:backgroundTint="@color/w"
                 android:gravity="center|center_vertical" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
@@ -75,6 +86,8 @@
         android:id="@+id/cardView6"
         android:layout_width="88dp"
         android:layout_height="0dp"
+        android:backgroundTint="@color/w"
+        app:cardCornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/cardView5"
         app:layout_constraintEnd_toStartOf="@+id/cardView7"
         app:layout_constraintStart_toEndOf="@+id/cardView5"
@@ -89,6 +102,9 @@
                 android:id="@+id/textView18"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:background="@drawable/tv_radius"
+                android:backgroundTint="@color/e"
                 android:gravity="center"
                 android:text="@string/cardType" />
 
@@ -96,6 +112,7 @@
                 android:id="@+id/cardType"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_margin="2dp"
                 android:gravity="center|center_vertical" />
         </LinearLayout>
 
@@ -105,12 +122,14 @@
         android:id="@+id/cardView7"
         android:layout_width="88dp"
         android:layout_height="0dp"
+        android:backgroundTint="@color/w"
+        app:cardCornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/cardView6"
         app:layout_constraintEnd_toEndOf="@+id/btnRequest"
         app:layout_constraintTop_toTopOf="@+id/cardView6">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
@@ -118,21 +137,28 @@
                 android:id="@+id/textView20"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:background="@drawable/tv_radius"
+                android:backgroundTint="@color/e"
                 android:gravity="center"
                 android:text="@string/country" />
 
             <TextView
                 android:id="@+id/country"
                 android:layout_width="match_parent"
-                android:layout_height="49dp"
+                android:layout_height="match_parent"
+                android:layout_margin="2dp"
+                android:layout_weight="3"
                 android:gravity="center|center_vertical" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/btnCountry"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/go_to_map"
-                android:textSize="10sp" />
+                android:layout_gravity="center"
+                android:backgroundTint="@color/r"
+                android:src="@drawable/ic_map" />
+
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
@@ -142,6 +168,8 @@
         android:layout_width="91dp"
         android:layout_height="111dp"
         android:layout_marginTop="16dp"
+        android:backgroundTint="@color/w"
+        app:cardCornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="@+id/cardView5"
         app:layout_constraintStart_toStartOf="@+id/cardView5"
         app:layout_constraintTop_toBottomOf="@+id/cardView5">
@@ -155,6 +183,9 @@
                 android:id="@+id/textView22"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:background="@drawable/tv_radius"
+                android:backgroundTint="@color/e"
                 android:gravity="center"
                 android:text="@string/bankName" />
 
@@ -162,6 +193,7 @@
                 android:id="@+id/bankName"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_margin="2dp"
                 android:gravity="center|center_vertical" />
         </LinearLayout>
 
@@ -171,6 +203,8 @@
         android:id="@+id/CardView9"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:backgroundTint="@color/w"
+        app:cardCornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/cardView8"
         app:layout_constraintEnd_toEndOf="@+id/cardView6"
         app:layout_constraintStart_toStartOf="@+id/cardView6"
@@ -185,21 +219,29 @@
                 android:id="@+id/textView24"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:background="@drawable/tv_radius"
+                android:backgroundTint="@color/e"
                 android:gravity="center"
                 android:text="@string/website" />
 
             <TextView
                 android:id="@+id/website"
                 android:layout_width="match_parent"
-                android:layout_height="47dp"
+                android:layout_height="match_parent"
+                android:layout_margin="2dp"
+                android:layout_weight="3"
                 android:gravity="center|center_vertical" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/btnWebSite"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/go_to_web"
-                android:textSize="10dp"/>
+                android:layout_gravity="center"
+                android:backgroundTint="@color/r"
+                android:src="@drawable/ic_search"
+                tools:src="@drawable/ic_search" />
+
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
@@ -207,6 +249,8 @@
         android:id="@+id/CardView10"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:backgroundTint="@color/w"
+        app:cardCornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/CardView9"
         app:layout_constraintEnd_toEndOf="@+id/cardView7"
         app:layout_constraintStart_toStartOf="@+id/cardView7"
@@ -221,21 +265,28 @@
                 android:id="@+id/textView26"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:background="@drawable/tv_radius"
+                android:backgroundTint="@color/e"
                 android:gravity="center"
                 android:text="@string/bankPhone" />
 
             <TextView
                 android:id="@+id/bankPhone"
                 android:layout_width="match_parent"
-                android:layout_height="47dp"
+                android:layout_height="match_parent"
+                android:layout_margin="2dp"
+                android:layout_weight="3"
                 android:gravity="center|center_vertical" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/btnPhone"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/call"
-                android:textSize="10dp"/>
+                android:layout_gravity="center"
+                android:backgroundTint="@color/r"
+                android:src="@drawable/ic_baseline_local_phone_24" />
+
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
@@ -243,22 +294,26 @@
         android:id="@+id/rvHistory"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/CardView10"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/cardView8"
-        app:layout_constraintTop_toBottomOf="@+id/tvHistory"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="12dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvHistory" />
 
     <TextView
         android:id="@+id/tvHistory"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/tv_radius"
+        android:backgroundTint="@color/e"
+        android:gravity="center"
         android:text="@string/requestHistory"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/CardView10"
         app:layout_constraintStart_toStartOf="@+id/cardView8"
