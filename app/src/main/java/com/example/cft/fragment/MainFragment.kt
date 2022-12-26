@@ -122,6 +122,5 @@ class MainFragment : Fragment() {
             cardList ->
             cardList.let { adapter.submitList(it) }
         }
-
     }
 }
