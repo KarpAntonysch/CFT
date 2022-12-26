@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 import org.json.JSONException
 import org.json.JSONObject
 
-class MainFragmentViewModel(private val repository: BankingRepository) : ViewModel() {
+class MainFragmentViewModel(private val repository: BankingRepository,private val listener: CallBackListener) : ViewModel() {
     val currentBin = MutableLiveData<BankingInformationModel>()
 
     fun binRequest(bin: String, context: Context) {
@@ -28,11 +28,10 @@ class MainFragmentViewModel(private val repository: BankingRepository) : ViewMod
             },
             { error ->
                 if (error is NoConnectionError) {
-                    Log.d("MyLog", "Err: Ошибка сети")
-                    //TODO оповещение ошибка сети
+                    listener.openConnectionDialog()//callBack в MaimFragment
                 } else {
                     Log.d("MyLog", "Err:$error Ошибка сервера")
-                    //TODO оповещение ошибка сервера
+                    listener.openServerDialog() // callBack в MainFragment
                 }
             }
         )

@@ -14,4 +14,12 @@
     <string name="noPhone">Информации о номере нет на сервере</string>
     <string name="noWeb">Информации о сайте нет на сервере</string>
     <string name="noCountry">Информации о стране нет на сервере</string>
+    <string name="titleWeb">Ошибка сети</string>
+    <string name="descriptionWeb">Проверьте подключение к интернету, скорее всего проблема в этом</string>
+    <string name="titleServer">Ошибка на стороне сервера</string>
+    <string name="descriptionServer">Что-то не так на сервере.Возможно:\n\n
+           ● Информации о вашей карте нет в базе.\n\n
+           ● Ваша платежная система MIR.</string>
+    <string name="posText">понятно</string>
+
 </resources>
