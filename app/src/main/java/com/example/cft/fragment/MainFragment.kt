@@ -59,7 +59,7 @@ class MainFragment : Fragment() {
         viewModel.currentBin.observe(viewLifecycleOwner) {
             with(binding) {
                 paymentSystem.text = it.paymentSystem
-                cardType.text = it?.cardType
+                cardType.text = it.cardType
                 country.text = it.country
                 bankName.text = it.bankName
                 website.text = it.website

@@ -24,7 +24,7 @@ class MainFragmentViewModel(private val repository: BankingRepository) : ViewMod
             url,
             { cardData ->
                 Log.d("MyLog", "Res: $cardData")
-                binDataUsage(cardData,bin)
+                binDataUsage(cardData, bin)
             },
             { error ->
                 if (error is NoConnectionError) {
@@ -40,7 +40,7 @@ class MainFragmentViewModel(private val repository: BankingRepository) : ViewMod
     }
 
 
-    private fun binDataUsage(cardData: String,bin: String) {
+    private fun binDataUsage(cardData: String, bin: String) {
         val jsonCardData = JSONObject(cardData)
 
         // try/catch для того, что б не зависить от форма json`а (так как сам сервер работает по разному: некоторые поля могут отсутсвовать, другие быть null)
@@ -50,42 +50,79 @@ class MainFragmentViewModel(private val repository: BankingRepository) : ViewMod
         bankingInformation.bin = bin
 
         try {
-            bankingInformation.paymentSystem = jsonCardData.getString("scheme")
+            val paymentSystem = jsonCardData.getString("scheme")
+            if (paymentSystem == "null") {
+                bankingInformation.paymentSystem = "Информация отсутсвует"
+            } else {
+                bankingInformation.paymentSystem = paymentSystem
+            }
         } catch (_: JSONException) {
             bankingInformation.paymentSystem = "Информация отсутсвует"
         }
+
         try {
-            bankingInformation.cardType = jsonCardData.getString("type")
+            val cardType = jsonCardData.getString("type")
+            if (cardType == "null") {
+                bankingInformation.cardType = "Информация отсутсвует"
+            } else {
+                bankingInformation.cardType = cardType
+            }
+
         } catch (_: JSONException) {
-            bankingInformation.cardType = "Информация отсутсвует"
+            bankingInformation.cardType = "Информацияотсутсвует"
         }
+
         try {
-            bankingInformation.country = jsonCardData.getJSONObject("country").getString("name")
+            val country = jsonCardData.getJSONObject("country").getString("name")
+            if (country =="null"){
+                bankingInformation.country = "Информацияотсутсвует"
+            }else{
+                bankingInformation.country = country
+            }
         } catch (_: JSONException) {
             bankingInformation.country = "Информация отсутсвует"
         }
 
         try {
-            bankingInformation.latitude =
-                jsonCardData.getJSONObject("country").getString("latitude")
+            val latitude = jsonCardData.getJSONObject("country").getString("latitude")
+            if(latitude == "null"){
+                bankingInformation.latitude = "Информация отсутсвует"
+            }else{
+                bankingInformation.latitude =latitude
+            }
         } catch (_: JSONException) {
             bankingInformation.latitude = "Информация отсутсвует"
         }
 
         try {
-            bankingInformation.longitude =
-                jsonCardData.getJSONObject("country").getString("longitude")
+            val longitude = jsonCardData.getJSONObject("country").getString("longitude")
+            if (longitude =="null"){
+                bankingInformation.longitude = "Информация отсутсвует"
+            }else{
+                bankingInformation.longitude = longitude
+            }
         } catch (_: JSONException) {
             bankingInformation.longitude = "Информация отсутсвует"
         }
 
         try {
-            bankingInformation.bankName = jsonCardData.getJSONObject("bank").getString("name")
+            val bankName = jsonCardData.getJSONObject("bank").getString("name")
+            if (bankName =="null"){
+                bankingInformation.bankName = "Информация отсутсвует"
+            } else{
+                bankingInformation.bankName = bankName
+            }
         } catch (_: JSONException) {
             bankingInformation.bankName = "Информация отсутсвует"
         }
+
         try {
-            bankingInformation.website = jsonCardData.getJSONObject("bank").getString("url")
+            val website = jsonCardData.getJSONObject("bank").getString("url")
+            if (website == "null"){
+                bankingInformation.website = "Информация отсутсвует"
+            }else{
+                bankingInformation.website = website
+            }
         } catch (_: JSONException) {
             bankingInformation.website = "Информация отсутсвует"
         }
@@ -101,5 +138,5 @@ class MainFragmentViewModel(private val repository: BankingRepository) : ViewMod
         repository.insertCard(card)
     }
 
-     val allCards:LiveData<List<BankingInformationModel>> = repository.getAllCards.asLiveData()
+    val allCards: LiveData<List<BankingInformationModel>> = repository.getAllCards.asLiveData()
 }
