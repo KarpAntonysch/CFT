@@ -11,4 +11,7 @@
     <string name="go_to_web">на сайт</string>
     <string name="go_to_map">к карте</string>
     <string name="requestHistory">История запросов</string>
+    <string name="noPhone">Информации о номере нет на сервере</string>
+    <string name="noWeb">Информации о сайте нет на сервере</string>
+    <string name="noCountry">Информации о стране нет на сервере</string>
 </resources>

@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.cft.R
 import com.example.cft.RvAdapter
@@ -79,7 +80,9 @@ class MainFragment : Fragment() {
             val intent = Intent(Intent.ACTION_DIAL,phoneUri )
             if (phoneNumber !== "Информация отсутсвует") {
                 startActivity(intent)
-            }//TODO оповещение, что номера нет в базе
+            }else{
+                Toast.makeText(requireContext(),requireContext().getString(R.string.noPhone),Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -89,7 +92,9 @@ class MainFragment : Fragment() {
         binding.btnWebSite.setOnClickListener {
             if (url !== "Информация отсутсвует") {
                 startActivity(intent)
-            }//TODO оповещение, что сайта нет в базе
+            }else{
+                Toast.makeText(requireContext(),requireContext().getString(R.string.noWeb),Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -99,7 +104,9 @@ class MainFragment : Fragment() {
         binding.btnCountry.setOnClickListener {
             if (latitude !== "Информация отсутсвует" || longitude !== "Информация отсутсвует") {
                 startActivity(mapIntent)
-            }//TODO оповещение, что координат нет в базе
+            }else{
+                Toast.makeText(requireContext(),requireContext().getString(R.string.noCountry),Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
