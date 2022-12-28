@@ -6,6 +6,7 @@ import androidx.lifecycle.*
 import com.android.volley.NoConnectionError
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.example.cft.retrofit.Repository
 import com.example.cft.room.BankingInformationModel
 import com.example.cft.room.BankingRepository
 import kotlinx.coroutines.launch
@@ -14,6 +15,15 @@ import org.json.JSONObject
 
 class MainFragmentViewModel(private val repository: BankingRepository,private val listener: CallBackListener) : ViewModel() {
     val currentBin = MutableLiveData<BankingInformationModel>()
+
+    private val retrofitRepository = Repository()
+
+    fun getPathBinData(bin:String){
+        viewModelScope.launch {
+            retrofitRepository.getPathBinData(bin)
+            Log.d("MyLog", "Retrofit: ${retrofitRepository.getPathBinData(bin).result}")
+        }
+    }
 
     fun binRequest(bin: String, context: Context) {
         val url = "https://lookup.binlist.net/$bin"

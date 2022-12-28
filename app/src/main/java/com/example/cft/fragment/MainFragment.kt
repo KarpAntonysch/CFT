@@ -36,7 +36,11 @@ class MainFragment : Fragment(), CallBackListener, DialogInterface {
         insertCard()
         realizationOfRV()
     }
+    private fun getRetrofit(){
+        viewModel.getPathBinData(binding.etBin.text.toString())
+        //viewModel.getQueryBinData(binding.etBin.text.toString())
 
+    }
     private fun getCurrentData() {
         binding.btnRequest.setOnClickListener {
             if (!binding.etBin.text.isNullOrEmpty()) {
@@ -48,6 +52,7 @@ class MainFragment : Fragment(), CallBackListener, DialogInterface {
             } else {
                 Toast.makeText(requireContext(), R.string.emptyBin, Toast.LENGTH_SHORT).show()
             }
+            getRetrofit()
         }
     }
 
