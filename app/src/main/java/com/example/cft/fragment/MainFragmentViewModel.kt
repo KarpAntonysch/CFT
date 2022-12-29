@@ -21,9 +21,11 @@ class MainFragmentViewModel(private val repository: BankingRepository,private va
     fun getPathBinData(bin:String){
         viewModelScope.launch {
             retrofitRepository.getPathBinData(bin)
-            Log.d("MyLog", "Retrofit: ${retrofitRepository.getPathBinData(bin).result}")
+            Log.d("MyLog", "Retrofit: ${retrofitRepository.getPathBinData(bin)}")
         }
     }
+
+
 
     fun binRequest(bin: String, context: Context) {
         val url = "https://lookup.binlist.net/$bin"

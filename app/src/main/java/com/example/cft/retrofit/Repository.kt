@@ -1,11 +1,10 @@
 package com.example.cft.retrofit
 
-import com.android.volley.Response
-import com.example.cft.retrofit.data.RetrofitData
+import com.example.cft.retrofit.data.RetrofitModel
 
 class Repository {
 
-    suspend fun getPathBinData(bin:String):Response<RetrofitData>{
+    suspend fun getPathBinData(bin:String):RetrofitModel{
         return RetrofitInstance.api.getPathBinData(bin)
     }
 }
